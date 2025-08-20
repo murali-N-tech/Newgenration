@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchNews, createNews, deleteNews } from '../../api/apiService';
 import { Link } from 'react-router-dom';
+import Pagination from '../../components/common/Pagination'; // Import the new component
 
 function ManageNews() {
   const [newsList, setNewsList] = useState([]);
@@ -8,9 +9,13 @@ function ManageNews() {
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState('');
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Show 5 news articles per page
 
-  // Function to fetch all news articles
   const loadNews = async () => {
+    setIsLoading(true);
     try {
       const data = await fetchNews();
       setNewsList(data);
@@ -21,37 +26,41 @@ function ManageNews() {
     }
   };
 
-  // Load news on component mount
   useEffect(() => {
     loadNews();
   }, []);
 
-  // Handle form submission to create a new article
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createNews({ title, content });
-      setMessage('News article created successfully!');
-      setTitle('');
-      setContent('');
-      loadNews(); // Refresh the list
+        await createNews({ title, content });
+        setMessage('News article created successfully!');
+        setTitle('');
+        setContent('');
+        loadNews(); // Refresh the list
     } catch (error) {
-      setMessage('Failed to create news article.');
+        setMessage('Failed to create news article.');
     }
   };
 
-  // Handle deleting an article
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this article?')) {
-      try {
-        await deleteNews(id);
-        setMessage('News article deleted successfully!');
-        loadNews(); // Refresh the list
-      } catch (error) {
-        setMessage('Failed to delete news article.');
-      }
+        try {
+            await deleteNews(id);
+            setMessage('News article deleted successfully!');
+            loadNews(); // Refresh the list
+        } catch (error) {
+            setMessage('Failed to delete news article.');
+        }
     }
   };
+
+  // Pagination logic
+  const totalPages = Math.ceil(newsList.length / itemsPerPage);
+  const currentItems = newsList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="container mx-auto p-4">
@@ -79,19 +88,27 @@ function ManageNews() {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4">Existing Articles</h2>
         {isLoading ? <p>Loading...</p> : (
-          <ul className="space-y-4">
-            {newsList.map((news) => (
-              <li key={news._id} className="flex justify-between items-center p-2 border-b">
-                <span>{news.title}</span>
-                <button onClick={() => handleDelete(news._id)} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className="space-y-4">
+              {currentItems.map((news) => (
+                <li key={news._id} className="flex justify-between items-center p-2 border-b">
+                  <span>{news.title}</span>
+                  <button onClick={() => handleDelete(news._id)} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+                </li>
+              ))}
+            </ul>
+            {totalPages > 1 && (
+                <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                />
+            )}
+          </>
         )}
       </div>
     </div>
   );
 }
 
-// Make sure this line exists at the end of your file
 export default ManageNews;

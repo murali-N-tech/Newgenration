@@ -1,30 +1,19 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AdminDashboard() {
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/admin/login');
-  };
+  const { user } = useContext(AuthContext);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
+    <div className="p-4 sm:p-8">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2 sm:mb-0">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-gray-800">
             Welcome, {user ? user.username : 'Admin'}!
           </h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
-          >
-            Logout
-          </button>
+          <p className="text-gray-500">Select an option below to manage your website's content.</p>
         </div>
         
         {/* Navigation Links Grid */}

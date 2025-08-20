@@ -6,11 +6,11 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './routes/PrivateRoute';
 
 // --- Page Components ---
-// Public Facing Page
 import MainWebsite from './pages/MainWebsite';
-
-// Admin Pages
 import AdminLoginPage from './pages/AdminLoginPage';
+
+// --- Admin Layout and Pages ---
+import AdminLayout from './components/admin/AdminLayout.jsx';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ManageNews from './pages/admin/ManageNews.jsx';
 import ManageEvents from './pages/admin/ManageEvents.jsx';
@@ -28,53 +28,23 @@ function App() {
         <Route path="/admin/login" element={<AdminLoginPage />} />
 
         {/* ============================================= */}
-        {/* ============== PRIVATE ADMIN ROUTES ========= */}
+        {/* === PRIVATE ADMIN ROUTES W/ SHARED LAYOUT === */}
         {/* ============================================= */}
-        
         <Route 
-          path="/admin/dashboard" 
+          path="/admin" 
           element={
             <PrivateRoute>
-              <AdminDashboard />
+              <AdminLayout />
             </PrivateRoute>
-          } 
-        />
-        
-        <Route 
-          path="/admin/manage-news" 
-          element={
-            <PrivateRoute>
-              <ManageNews />
-            </PrivateRoute>
-          } 
-        />
-
-        <Route 
-          path="/admin/manage-events" 
-          element={
-            <PrivateRoute>
-              <ManageEvents />
-            </PrivateRoute>
-          } 
-        />
-
-        <Route 
-          path="/admin/manage-gallery" 
-          element={
-            <PrivateRoute>
-              <ManageGallery />
-            </PrivateRoute>
-          } 
-        />
-
-        <Route 
-          path="/admin/view-admissions" 
-          element={
-            <PrivateRoute>
-              <ViewAdmissions />
-            </PrivateRoute>
-          } 
-        />
+          }
+        >
+          {/* Child routes will render inside AdminLayout's <Outlet /> */}
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="manage-news" element={<ManageNews />} />
+          <Route path="manage-events" element={<ManageEvents />} />
+          <Route path="manage-gallery" element={<ManageGallery />} />
+          <Route path="view-admissions" element={<ViewAdmissions />} />
+        </Route>
 
       </Routes>
     </AuthProvider>
