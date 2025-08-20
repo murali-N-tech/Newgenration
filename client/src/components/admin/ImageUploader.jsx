@@ -8,9 +8,12 @@ const authenticator = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = user ? user.token : null;
 
-    const response = await axios.get('http://localhost:5000/api/imagekit-auth', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      "http://localhost:5001/api/imagekit-auth",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Authentication request failed", error);
