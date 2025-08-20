@@ -30,6 +30,7 @@ app.use('/api/events', require('./routes/eventRoutes'));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/admissions', require('./routes/admissionRoutes'));
 app.use('/api/imagekit-auth', require('./routes/imagekitRoutes'));
+app.use('/api/contact', require('./routes/contactRoutes'));
 
 
 // A simple test route to make sure the API is running

@@ -114,3 +114,12 @@ export const updateAdmissionStatus = async (id, status) => {
   const response = await axios.put(`${API_URL}admissions/${id}`, { status }, getAuthConfig());
   return response.data;
 };
+
+export const submitContactForm = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}contact`, formData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || new Error('Server submission error');
+  }
+};

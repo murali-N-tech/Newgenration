@@ -7,6 +7,7 @@ import EventsSection from '../components/sections/EventsSection';
 import GallerySection from '../components/sections/GallerySection';
 import AdmissionsSection from '../components/sections/AdmissionsSection'; // Import the final section
 import Footer from '../components/common/Footer';
+import ContactSection from '../components/sections/ContactSection';
 
 function MainWebsite() {
   return (
@@ -15,10 +16,12 @@ function MainWebsite() {
       <main>
         <HeroSection />
         <AboutSection />
+        <ContactSection />
         <NewsSection />
         <EventsSection />
         <GallerySection />
         <AdmissionsSection />
+
       </main>
       <Footer />
     </div>
