@@ -8,7 +8,9 @@ const navLinks = [
   { to: "about", label: "About Us" },
   { to: "news", label: "News" },
   { to: "events", label: "Events" },
+  { to: 'field-trips', label: 'Field Trips' },
   { to: "gallery", label: "Gallery" },
+  { to: 'staff', label: 'Our Staff' },
   { to: "admissions", label: "Admissions" },
 ];
 

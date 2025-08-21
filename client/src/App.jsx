@@ -16,6 +16,8 @@ import ManageNews from './pages/admin/ManageNews.jsx';
 import ManageEvents from './pages/admin/ManageEvents.jsx';
 import ManageGallery from './pages/admin/ManageGallery.jsx';
 import ViewAdmissions from './pages/admin/ViewAdmissions.jsx';
+import ManageStaff from './pages/admin/ManageStaff.jsx';
+import ManageFieldTrips from './pages/admin/ManageFieldTrips.jsx'; // This line was missing
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
           <Route path="manage-events" element={<ManageEvents />} />
           <Route path="manage-gallery" element={<ManageGallery />} />
           <Route path="view-admissions" element={<ViewAdmissions />} />
+          <Route path="manage-staff" element={<ManageStaff />} />
+          <Route path="manage-fieldtrips" element={<ManageFieldTrips />} />
         </Route>
 
       </Routes>

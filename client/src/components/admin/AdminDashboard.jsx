@@ -42,7 +42,7 @@ function AdminDashboard() {
             to="/admin/manage-events" 
             className="bg-green-100 p-6 rounded-lg text-center hover:bg-green-200 transition"
           >
-            <h3 className="font-bold text-lg text-green-800">Manage Events</h3>
+            <h3 className="font-bold text-lg text-green-800">Manage Achivements</h3>
           </Link>
 
           {/* Manage Gallery */}

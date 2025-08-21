@@ -9,7 +9,7 @@ const authenticator = async () => {
     const token = user ? user.token : null;
 
     const response = await axios.get(
-      "http://localhost:5001/api/imagekit-auth",
+      "https://newgeneration-production.up.railway.app/api/imagekit-auth",
       {
         headers: { Authorization: `Bearer ${token}` },
       }

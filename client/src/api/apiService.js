@@ -70,6 +70,23 @@ export const adminLogin = async (username, password) => {
   }
 };
 
+export const fetchStaff = async () => {
+  const response = await axios.get(`${API_URL}staff`);
+  return response.data;
+};
+
+/**
+ * Submits a contact form message. (This was missing)
+ */
+export const submitContactForm = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}contact`, formData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || new Error('Server submission error');
+  }
+};
+
 // --- Protected Admin Functions ---
 
 export const createNews = async (newsData) => {
@@ -107,19 +124,37 @@ export const getAdmissions = async () => {
   return response.data;
 };
 
-/**
- * Updates the status of an admission application. (This was missing)
- */
 export const updateAdmissionStatus = async (id, status) => {
   const response = await axios.put(`${API_URL}admissions/${id}`, { status }, getAuthConfig());
   return response.data;
 };
 
-export const submitContactForm = async (formData) => {
-  try {
-    const response = await axios.post(`${API_URL}contact`, formData);
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || new Error('Server submission error');
-  }
+export const addStaffMember = async (staffData) => {
+  const response = await axios.post(`${API_URL}staff`, staffData, getAuthConfig());
+  return response.data;
+};
+
+export const deleteStaffMember = async (staffId) => {
+  const response = await axios.delete(`${API_URL}staff/${staffId}`, getAuthConfig());
+  return response.data;
+};
+export const fetchFieldTrips = async () => {
+  const response = await axios.get(`${API_URL}fieldtrips`);
+  return response.data;
+};
+
+/**
+ * Adds a new field trip.
+ */
+export const addFieldTrip = async (tripData) => {
+  const response = await axios.post(`${API_URL}fieldtrips`, tripData, getAuthConfig());
+  return response.data;
+};
+
+/**
+ * Deletes a field trip by ID.
+ */
+export const deleteFieldTrip = async (tripId) => {
+  const response = await axios.delete(`${API_URL}fieldtrips/${tripId}`, getAuthConfig());
+  return response.data;
 };

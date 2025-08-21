@@ -8,6 +8,8 @@ import GallerySection from '../components/sections/GallerySection';
 import AdmissionsSection from '../components/sections/AdmissionsSection'; // Import the final section
 import Footer from '../components/common/Footer';
 import ContactSection from '../components/sections/ContactSection';
+import StaffSection from '../components/sections/StaffSection';
+import FieldTripsSection from '../components/sections/FieldTripsSection'; // Import the field trips section
 
 function MainWebsite() {
   return (
@@ -19,7 +21,9 @@ function MainWebsite() {
         <ContactSection />
         <NewsSection />
         <EventsSection />
+        <FieldTripsSection />
         <GallerySection />
+        <StaffSection />
         <AdmissionsSection />
 
       </main>
